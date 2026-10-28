@@ -1,0 +1,13 @@
+module LogosLexicon
+  use int.Int
+  use list.List
+  use string.String
+  type slice = { index: int; surface: string }
+  type lexeme = { identifier: string; language: string; spelling: string;
+                  slices: list slice; source: string }
+  predicate valid_index (n: int) (s: slice) = 0 <= s.index /\ s.index < n
+  let rec function slice_count (xs: list slice) : int =
+    match xs with Nil -> 0 | Cons _ tail -> 1 + slice_count tail end
+  let function identity (x: lexeme) : lexeme = x
+    ensures { result = x }
+end
