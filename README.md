@@ -14,6 +14,14 @@ sh scripts/run_all.sh
 
 That starts the etymology rules, the lexicon and deduction modules, the Logic Stack in Prolog, C, Haskell and OCaml, the Boogie proofs, the execution lock, the Ruby tool and the archive check together, one job per part, and prints what each one answers. `JOBS=2` limits how many run at once.
 
+For a steady production run on SWI-Prolog there is the gardener:
+
+```sh
+sh scripts/gardener.sh
+```
+
+It runs each SWI-Prolog part one after another (etymology, lexicon, deduction, both Logic Stacks, the execution lock and the WAM), keeps a log per part in `logs/`, and prints a PASS or FAIL line for each. It runs well from cron or a systemd timer, and `logs/status.txt` always holds the last pass.
+
 ## A short history
 
 Logic programming is the idea that a program can be a set of facts and rules, and that running it means asking a question and letting the machine search for answers. These are the systems behind the code in this lab.
@@ -109,7 +117,7 @@ Words become facts, and every derivation carries the source it came from. The ru
 
 ### `logos_prolog/`: the lexicon and the deduction engine
 
-`logos.pl` holds the lexicon (words, senses, evidence, relations, segmentations), unification with an occurs check, depth-bounded Horn resolution, finite-domain constraints, exact probability over finite worlds, semirings and a causal transition system. `logos_deduction.pl` holds fixed points, stratified negation, graph search, finite-trace temporal logic and provenance.
+`logos.pl` holds the lexicon (words, senses, evidence, relations, segmentations), unification with an occurs check, depth-bounded Horn resolution, finite-domain constraints, exact probability over finite worlds, semirings and a causal transition system. `logos_deduction.pl` holds fixed points, stratified negation, graph search, finite-trace temporal logic (`eventually`, `always` and `until`) and provenance.
 
 ### `logos_real/`: the word graph in Ruby
 
