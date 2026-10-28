@@ -1,0 +1,16 @@
+FOIL rule: [xor23-1,xor01-0]
+FOIL rule: [and23-1,xor01-1]
+FOIL rule: [xor23-0,xor01-1]
+MIL: invented inv1 = next;next  [0-2,1-3]
+MIL program: [ident(next),ident(inv1),chain(next,inv1)]   (covers 6/6 pos, 0/3 neg)
+node target
+  node clause(1)
+    leaf xor23=1
+    leaf xor01=0
+  node clause(2)
+    leaf and23=1
+    leaf xor01=1
+  node clause(3)
+    leaf xor23=0
+    leaf xor01=1
+training accuracy: 1

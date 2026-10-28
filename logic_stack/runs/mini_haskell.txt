@@ -1,0 +1,18 @@
+=== L0: 8 pos / 8 neg examples ===
+=== L2: FOIL rule ===
+[XorAt 2 3 1,XorAt 0 1 0]
+[XorAt 2 3 0,XorAt 0 1 1]
+=== L3: Metagol invented program ===
+[(("inv1",[V "A",V "B"]),[("next",[V "A",V "C"]),("next",[V "C",V "B"])]),(("f",[V "A",V "B"]),[("next",[V "A",V "B"])]),(("f",[V "A",V "B"]),[("inv1",[V "A",V "B"])]),(("f",[V "A",V "B"]),[("next",[V "A",V "C"]),("inv1",[V "C",V "B"])])]
+=== L4: Tree ===
+XorAt 2 3 1
+  |XorAt 0 1 0
+  |  -> default = True
+
+
+XorAt 2 3 0
+  |XorAt 0 1 1
+  |  -> default = True
+
+
+=== training accuracy: 1.0 ===

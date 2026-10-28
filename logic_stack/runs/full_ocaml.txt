@@ -1,0 +1,30 @@
+=== L0 binary: 4-bit universe, odd-parity target ===
+    8 pos / 8 neg
+=== L1 logic engine self-test ===
+    unify(X,1 ; 0,Y) = yes
+    entails succ(1,2) = true
+=== L2 FOIL (general, gain-guided, separate&conquer) ===
+    target(E) :- b2^b3=1, b0^b1=0
+    target(E) :- b2^b3=0, b0^b1=1
+=== L3b ILASP-lite: constraints + simplification ===
+    2 -> 2 clauses
+=== L3 METAGOL: MIL with invention ===
+    inv1(A,B) :- succ(A,C), succ(C,B).
+    f(A,B) :- inv1(A,B).
+    f(A,B) :- succ(A,C), f(C,B).   % tailrec
+    inv1(0,2) provable = true
+=== L4 tree ===
+    b2^b3=1 = true
+      b0^b1=0 = true
+        -> YES
+      b0^b1=0 = false
+        -> NO
+    b2^b3=1 = false
+      b2^b3=0 = true
+        b0^b1=1 = true
+          -> YES
+        b0^b1=1 = false
+          -> NO
+      b2^b3=0 = false
+        -> NO
+=== training accuracy: 1.000 ===

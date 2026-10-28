@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0 -->
+<!-- Copyright Ahmad Ali Parr -->
+<!-- Stochastic Autonomous Compute Mesh: rigid OWL 2 DL taxonomy for the execution lock. -->
+<rdf:RDF
+    xmlns="https://snapkitty.example/scm#"
+    xml:base="https://snapkitty.example/scm"
+    xmlns:scm="https://snapkitty.example/scm#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+  <owl:Ontology rdf:about="https://snapkitty.example/scm"/>
+
+  <!-- Classes -->
+  <owl:Class rdf:about="https://snapkitty.example/scm#Agent"/>
+  <owl:Class rdf:about="https://snapkitty.example/scm#Capability"/>
+  <owl:Class rdf:about="https://snapkitty.example/scm#Signal"/>
+  <owl:Class rdf:about="https://snapkitty.example/scm#TrustDeed"/>
+  <owl:Class rdf:about="https://snapkitty.example/scm#WORM_Hash"/>
+
+  <owl:Class rdf:about="https://snapkitty.example/scm#ProvenSignal">
+    <rdfs:subClassOf rdf:resource="https://snapkitty.example/scm#Signal"/>
+    <owl:disjointWith rdf:resource="https://snapkitty.example/scm#Noise"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="https://snapkitty.example/scm#Noise">
+    <rdfs:subClassOf rdf:resource="https://snapkitty.example/scm#Signal"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="https://snapkitty.example/scm#AgentExecution">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="https://snapkitty.example/scm#hasWORMHash"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        <owl:onClass rdf:resource="https://snapkitty.example/scm#WORM_Hash"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <!-- Pairwise disjointness of the rigid top-level classes -->
+  <owl:AllDisjointClasses>
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="https://snapkitty.example/scm#Agent"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#Capability"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#Signal"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#TrustDeed"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#WORM_Hash"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#AgentExecution"/>
+    </owl:members>
+  </owl:AllDisjointClasses>
+
+  <!-- Object properties -->
+  <owl:ObjectProperty rdf:about="https://snapkitty.example/scm#hasWORMHash">
+    <rdfs:domain rdf:resource="https://snapkitty.example/scm#AgentExecution"/>
+    <rdfs:range rdf:resource="https://snapkitty.example/scm#WORM_Hash"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="https://snapkitty.example/scm#executedBy">
+    <rdfs:domain rdf:resource="https://snapkitty.example/scm#AgentExecution"/>
+    <rdfs:range rdf:resource="https://snapkitty.example/scm#Agent"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="https://snapkitty.example/scm#deedHolder">
+    <rdfs:domain rdf:resource="https://snapkitty.example/scm#TrustDeed"/>
+    <rdfs:range rdf:resource="https://snapkitty.example/scm#Agent"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="https://snapkitty.example/scm#deedCapability">
+    <rdfs:domain rdf:resource="https://snapkitty.example/scm#TrustDeed"/>
+    <rdfs:range rdf:resource="https://snapkitty.example/scm#Capability"/>
+  </owl:ObjectProperty>
+
+  <!-- OWL anchor: agents -->
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#agent_alpha">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#Agent"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#agent_beta">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#Agent"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#agent_gamma">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#Agent"/>
+  </owl:NamedIndividual>
+
+  <!-- OWL anchor: capabilities -->
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#cap_seal_recursion">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#Capability"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#cap_read_mesh">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#Capability"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#cap_spawn_worker">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#Capability"/>
+  </owl:NamedIndividual>
+
+  <!-- OWL anchor: proven signals -->
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#sig_heartbeat">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#ProvenSignal"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#sig_quorum_ack">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#ProvenSignal"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#sig_merkle_root">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#ProvenSignal"/>
+  </owl:NamedIndividual>
+
+  <!-- OWL anchor: a known noise signal -->
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#sig_static_burst">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#Noise"/>
+  </owl:NamedIndividual>
+
+  <!-- OWL anchor: a trust deed -->
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#deed_alpha_seal">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#TrustDeed"/>
+    <deedHolder rdf:resource="https://snapkitty.example/scm#agent_alpha"/>
+    <deedCapability rdf:resource="https://snapkitty.example/scm#cap_seal_recursion"/>
+  </owl:NamedIndividual>
+
+  <!-- OWL anchor: one sealed execution carrying exactly one WORM hash -->
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#hash_0">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#WORM_Hash"/>
+  </owl:NamedIndividual>
+  <owl:NamedIndividual rdf:about="https://snapkitty.example/scm#exec_0">
+    <rdf:type rdf:resource="https://snapkitty.example/scm#AgentExecution"/>
+    <executedBy rdf:resource="https://snapkitty.example/scm#agent_alpha"/>
+    <hasWORMHash rdf:resource="https://snapkitty.example/scm#hash_0"/>
+  </owl:NamedIndividual>
+
+  <owl:AllDifferent>
+    <owl:distinctMembers rdf:parseType="Collection">
+      <rdf:Description rdf:about="https://snapkitty.example/scm#agent_alpha"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#agent_beta"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#agent_gamma"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#cap_seal_recursion"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#cap_read_mesh"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#cap_spawn_worker"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#sig_heartbeat"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#sig_quorum_ack"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#sig_merkle_root"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#sig_static_burst"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#deed_alpha_seal"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#hash_0"/>
+      <rdf:Description rdf:about="https://snapkitty.example/scm#exec_0"/>
+    </owl:distinctMembers>
+  </owl:AllDifferent>
+</rdf:RDF>

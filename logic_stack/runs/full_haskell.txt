@@ -1,0 +1,30 @@
+=== L0 binary: 4-bit universe, odd-parity target ===
+    8 pos / 8 neg
+=== L1 logic engine self-test ===
+    unify(X,1 ; 0,Y) = Just [("Y",C "1"),("X",C "0")]
+    entails succ(1,2): True
+=== L2 FOIL (general, gain-guided, separate&conquer) ===
+    target(E) :- [XorAt 0 1 1,XorAt 2 3 0]
+    target(E) :- [XorAt 0 1 0,XorAt 2 3 1]
+=== L3b ILASP-lite: constraints + simplification ===
+    target(E) :- [XorAt 0 1 1,XorAt 2 3 0]
+    target(E) :- [XorAt 0 1 0,XorAt 2 3 1]
+    pruned/simplified 0 clause(s)
+=== L3 METAGOL: MIL with invention ===
+    program: [InventedChain 1 "succ" "succ",Tailrec "succ"]
+    inv1(0,2) provable: True
+=== L4 tree ===
+    XorAt 0 1 1 = true
+      XorAt 2 3 0 = true
+        -> YES
+      XorAt 2 3 0 = false
+        -> NO
+    XorAt 0 1 1 = false
+      XorAt 0 1 0 = true
+        XorAt 2 3 1 = true
+          -> YES
+        XorAt 2 3 1 = false
+          -> NO
+      XorAt 0 1 0 = false
+        -> NO
+=== training accuracy: 1.0

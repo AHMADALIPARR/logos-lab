@@ -1,0 +1,18 @@
+L0: 8 pos / 8 neg over 4-bit vectors
+L1: next(0,1)? 1  inv1(0,2) [meta-chain]? 1  inv1(2,0)? 0
+L2: FOIL rules (2 clauses):
+     target(E) :- b[0]^b[1]==0, b[2]^b[3]==1.
+     target(E) :- b[0]^b[1]==1, b[2]^b[3]==0.
+L3: metagol inv1 = next;next (chain meta-rule, invented)
+     f(A,B) :- next(A,B).  f(A,B) :- inv1(A,B).  f(A,B) :- next(A,C), inv1(C,B).
+     f covers 6/6 pos, 0/3 neg
+L4: tree:
+  clause 1:
+    node: b[0]^b[1]==0
+     node: b[2]^b[3]==1
+      leaf: pos (odd parity)
+  clause 2:
+    node: b[0]^b[1]==1
+     node: b[2]^b[3]==0
+      leaf: pos (odd parity)
+training accuracy: 1.000

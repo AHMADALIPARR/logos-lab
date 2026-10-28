@@ -1,0 +1,16 @@
+L0: 8 pos / 8 neg
+L1: next(0,1)=true inv1(0,2)=true inv1(2,0)=false
+L2: FOIL rules (2 clauses):
+     target(E) :- b2^b3=1 b0^b1=0 
+     target(E) :- b2^b3=0 b0^b1=1 
+L3: inv1 invented via meta-chain
+     f(A,B) :- next(A,B).  f(A,B) :- inv1(A,B).  f(A,B) :- next(A,C), inv1(C,B).
+     f covers 6/6 pos, 0/3 neg
+L4:
+  b2^b3=1
+    b0^b1=0
+      -> default = true
+  b2^b3=0
+    b0^b1=1
+      -> default = true
+training accuracy: 1.000

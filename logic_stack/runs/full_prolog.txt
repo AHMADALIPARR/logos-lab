@@ -1,0 +1,19 @@
+== L0 binary: 4-bit universe, odd-parity target ==
+   8 pos / 8 neg examples
+== L2 FOIL (general, entropy-guided) ==
+   target(E) :- eqxor(1,0,0) eqxor(3,2,1).
+   target(E) :- eqxor(1,0,1) eqxor(3,2,0).
+== L3b ILASP-lite: constraint prune + simplify ==
+ILASP constraint phase: 0/2 clauses pruned (cover neg => violate constraint).
+== L3 METAGOL: MIL with invention ==
+MIL: single chain inconsistent -> invent inv1
+        inv1(A,B) :- succ(A,C), succ(C,B).
+        inv1 covers 3/6 pos examples, 0/4 neg.
+        f(A,B) :- inv1(A,B).
+        f(A,B) :- succ(A,C), f(C,B).   % tailrec
+        f covers 6/6 pos examples, 0/4 neg.
+== L4 tree ==
+branch: eqxor(1,0,0) eqxor(3,2,1)
+   branch: eqxor(1,0,1) eqxor(3,2,0)
+      leaf: NEG
+   training accuracy: 1
