@@ -1,0 +1,16 @@
+K = vowel
+K = consonant
+X = a
+X = none
+K = atom
+K = unbound
+K = other
+true
+false
+C = green
+C = blue
+X = left
+X = right
+X = green, Y = green
+X = blue, Y = found
+true

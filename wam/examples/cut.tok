@@ -1,0 +1,85 @@
+% SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+% Copyright Ahmad Ali Parr
+
+% cut.tok -- a cut commits to the first clause
+%
+% Etymology: cut, from Middle English cutten, "to cut off": the choice
+% points left behind are cut off the stack.
+%
+% Usage:
+%   ./wam -all examples/cut.tok
+%
+%   p(a, first) :- !.
+%   p(_, second).
+%
+%   color(red).  color(green).  color(blue).
+%   first_color(C) :- color(C), !.
+
+%% ── p/2: neck_cut, the cut sits right after the head ──────────────────────
+p/2:
+  try_me_else p/2#2
+  get_constant a X1
+  get_constant first X2
+  neck_cut                   % drop the second clause
+  proceed
+p/2#2:
+  trust_me
+  get_constant second X2
+  proceed
+
+%% ── color/1 and first_color/1: get_level and cut after a call ─────────────
+color/1:
+  try_me_else color/1#2
+  get_constant red X1
+  proceed
+color/1#2:
+  retry_me_else color/1#3
+  get_constant green X1
+  proceed
+color/1#3:
+  trust_me
+  get_constant blue X1
+  proceed
+
+first_color/1:
+  allocate 1
+  get_level Y1               % remember B before anything is tried
+  call color/1
+  cut Y1                     % drop color/1's other clauses
+  deallocate
+  proceed
+
+%% ── Queries ───────────────────────────────────────────────────────────────
+% ?- p(a, R).      the cut commits: only first
+query
+  name R Y1
+  allocate 1
+  put_constant a X1
+  put_variable Y1 X2
+  call p/2
+  halt
+
+% ?- p(b, R).      clause 1 does not match, clause 2 answers
+query
+  name R Y1
+  allocate 1
+  put_constant b X1
+  put_variable Y1 X2
+  call p/2
+  halt
+
+% ?- color(C).     without a cut: all three
+query
+  name C Y1
+  allocate 1
+  put_variable Y1 X1
+  call color/1
+  halt
+
+% ?- first_color(C).   with the cut: only red
+query
+  name C Y1
+  allocate 1
+  put_variable Y1 X1
+  call first_color/1
+  halt

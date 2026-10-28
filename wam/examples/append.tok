@@ -1,0 +1,93 @@
+% SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+% Copyright Ahmad Ali Parr
+
+% append.tok -- append/3 run forwards and backwards
+%
+% Etymology: append, Latin appendere "to hang upon" (ad "to" + pendere "to hang").
+%
+% Usage:
+%   ./wam -all examples/append.tok
+%
+%   append([], L, L).
+%   append([H|T], L, [H|R]) :- append(T, L, R).
+%
+% switch_on_term on the first argument sends [] to clause 1 and a list to
+% clause 2 without leaving a choice point; an unbound first argument tries both.
+
+%% ── append/3 ──────────────────────────────────────────────────────────────
+append/3:
+  switch_on_term append/3#var append/3#nil append/3#list fail
+append/3#var:
+  try_me_else append/3#2
+append/3#nil:
+  get_constant [] X1
+  get_variable X4 X2         % L
+  get_value X4 X3
+  proceed
+append/3#2:
+  trust_me
+append/3#list:
+  get_list X1                % [H|T]
+  unify_variable X4          % H
+  unify_variable X1          % T, ready as the first argument
+  get_list X3                % [H|R]
+  unify_value X4
+  unify_variable X3          % R, ready as the third argument
+  execute append/3
+
+%% ── Queries ───────────────────────────────────────────────────────────────
+% ?- append([a,b], [c], X).          forwards
+query
+  name X Y1
+  allocate 1
+  put_list X4                % [b]
+  set_constant b
+  set_constant []
+  put_list X1                % [a,b]
+  set_constant a
+  set_value X4
+  put_list X2                % [c]
+  set_constant c
+  set_constant []
+  put_variable Y1 X3
+  call append/3
+  halt
+
+% ?- append(X, Y, [a,b,c]).          backwards: every split
+query
+  name X Y1
+  name Y Y2
+  allocate 2
+  put_variable Y1 X1
+  put_variable Y2 X2
+  put_list X5                % [c]
+  set_constant c
+  set_constant []
+  put_list X4                % [b,c]
+  set_constant b
+  set_value X5
+  put_list X3                % [a,b,c]
+  set_constant a
+  set_value X4
+  call append/3
+  halt
+
+% ?- append(X, [c], [a,b,c]).        which prefix leaves [c]?
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_list X2
+  set_constant c
+  set_constant []
+  put_list X5
+  set_constant c
+  set_constant []
+  put_list X4
+  set_constant b
+  set_value X5
+  put_list X3
+  set_constant a
+  set_value X4
+  call append/3
+  halt

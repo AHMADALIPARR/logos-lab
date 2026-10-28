@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+% Copyright Ahmad Ali Parr
+
+% member.tok -- member/2 gives every element on backtracking
+%
+% Etymology: member, Latin membrum "limb, part of a body".
+%
+% Usage:
+%   ./wam -all examples/member.tok
+%
+%   member(X, [X|_]).
+%   member(X, [_|T]) :- member(X, T).
+
+%% ── member/2 ──────────────────────────────────────────────────────────────
+member/2:
+  try_me_else member/2#2
+  get_list X2                % [X|_]; X is already in X1
+  unify_value X1
+  unify_void 1
+  proceed
+member/2#2:
+  trust_me
+  get_list X2                % [_|T]
+  unify_void 1
+  unify_variable X2          % T, ready as the second argument
+  execute member/2
+
+%% ── Queries ───────────────────────────────────────────────────────────────
+% ?- member(X, [a,b,c]).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_list X4                % [c]
+  set_constant c
+  set_constant []
+  put_list X5                % [b,c]
+  set_constant b
+  set_value X4
+  put_list X2                % [a,b,c]
+  set_constant a
+  set_value X5
+  call member/2
+  halt
+
+% ?- member(b, [a,b,c]).
+query
+  allocate 0
+  put_constant b X1
+  put_list X4
+  set_constant c
+  set_constant []
+  put_list X5
+  set_constant b
+  set_value X4
+  put_list X2
+  set_constant a
+  set_value X5
+  call member/2
+  halt
+
+% ?- member(d, [a,b,c]).
+query
+  allocate 0
+  put_constant d X1
+  put_list X4
+  set_constant c
+  set_constant []
+  put_list X5
+  set_constant b
+  set_value X4
+  put_list X2
+  set_constant a
+  set_value X5
+  call member/2
+  halt

@@ -1,0 +1,42 @@
+% SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+% Copyright Ahmad Ali Parr
+
+% unify.tok -- the tutorial's unification example
+%
+% Etymology: unify, from Latin unus "one" + facere "to make": make two terms one.
+%
+% Usage:
+%   ./wam examples/unify.tok
+%   ./wam -trace examples/unify.tok
+%
+% Unifies   p(Z, h(Z,W), f(W))   with   p(f(X), h(Y, f(a)), Y).
+% The query builds its three arguments on the heap, the program clause
+% takes them apart: read mode where the heap already has a structure,
+% write mode where it still holds a free variable.
+
+%% ── The clause p(f(X), h(Y,f(a)), Y) ──────────────────────────────────────
+p/3:
+  get_structure f/1 X1       % f(
+  unify_variable X4          %   X )
+  get_structure h/2 X2       % h(
+  unify_variable X5          %   Y,
+  unify_variable X6          %   f(a) )
+  get_value X5 X3            % third argument is Y again
+  get_structure f/1 X6
+  unify_variable X7
+  get_constant a X7
+  proceed
+
+%% ── The query p(Z, h(Z,W), f(W)) ──────────────────────────────────────────
+query
+  name Z Y1
+  name W Y2
+  allocate 2
+  put_structure h/2 X2       % h(
+  set_variable Y1            %   Z,
+  set_variable Y2            %   W )
+  put_value Y1 X1            % first argument is Z
+  put_structure f/1 X3       % f(
+  set_value Y2               %   W )
+  call p/3
+  halt

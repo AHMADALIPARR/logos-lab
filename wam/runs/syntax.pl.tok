@@ -1,0 +1,322 @@
+% emitted by emit.pl
+
+%% name_of/2
+name_of/2:
+  switch_on_term name_of/2#v name_of/2#v fail fail
+name_of/2#v:
+  try name_of/2#1
+  retry name_of/2#2
+  retry name_of/2#3
+  retry name_of/2#4
+  trust name_of/2#5
+name_of/2#1:
+  get_constant 'Hello World' X1
+  get_constant greeting X2
+  proceed
+name_of/2#2:
+  get_constant 'it''s' X1
+  get_constant apostrophe X2
+  proceed
+name_of/2#3:
+  get_constant 'tab\there' X1
+  get_constant escape X2
+  proceed
+name_of/2#4:
+  get_constant [] X1
+  get_constant nil X2
+  proceed
+name_of/2#5:
+  get_constant '{}' X1
+  get_constant braces X2
+  proceed
+
+%% code_of/2
+code_of/2:
+  switch_on_term code_of/2#v code_of/2#v fail fail
+code_of/2#v:
+  try code_of/2#1
+  retry code_of/2#2
+  trust code_of/2#3
+code_of/2#1:
+  get_constant 97 X1
+  get_constant letter_a X2
+  proceed
+code_of/2#2:
+  get_constant 32 X1
+  get_constant space X2
+  proceed
+code_of/2#3:
+  get_constant 39 X1
+  get_constant quote X2
+  proceed
+
+%% number_of/2
+number_of/2:
+  switch_on_term number_of/2#v number_of/2#v fail fail
+number_of/2#v:
+  try number_of/2#1
+  retry number_of/2#2
+  retry number_of/2#3
+  retry number_of/2#4
+  trust number_of/2#5
+number_of/2#1:
+  get_constant 42 X1
+  get_constant int X2
+  proceed
+number_of/2#2:
+  get_constant -7 X1
+  get_constant negative X2
+  proceed
+number_of/2#3:
+  get_constant 3.14 X1
+  get_constant float X2
+  proceed
+number_of/2#4:
+  get_constant 31 X1
+  get_constant hex X2
+  proceed
+number_of/2#5:
+  get_constant 5 X1
+  get_constant binary X2
+  proceed
+
+%% text/2
+text/2:
+  get_list X1
+  unify_constant 104
+  unify_variable X3
+  get_list X3
+  unify_constant 105
+  unify_constant []
+  get_constant codes X2
+  proceed
+
+%% curly/1
+curly/1:
+  get_structure '{}'/1 X1
+  unify_variable X2
+  get_structure ','/2 X2
+  unify_constant a
+  unify_constant b
+  proceed
+
+%% partial/2
+partial/2:
+  get_list X1
+  unify_constant a
+  unify_variable X3
+  get_list X3
+  unify_constant b
+  unify_variable X4
+  get_value X4 X2
+  proceed
+
+%% rule/1
+rule/1:
+  switch_on_term rule/1#v fail fail rule/1#v
+rule/1#v:
+  try rule/1#1
+  retry rule/1#2
+  retry rule/1#3
+  retry rule/1#4
+  retry rule/1#5
+  trust rule/1#6
+rule/1#1:
+  get_structure '===>'/2 X1
+  unify_constant a
+  unify_constant b
+  proceed
+rule/1#2:
+  get_structure '&'/2 X1
+  unify_constant x
+  unify_variable X2
+  get_structure '&'/2 X2
+  unify_constant y
+  unify_constant z
+  proceed
+rule/1#3:
+  get_structure '-'/1 X1
+  unify_constant 1
+  proceed
+rule/1#4:
+  get_structure '-'/2 X1
+  unify_variable X2
+  unify_constant 3
+  get_structure '-'/2 X2
+  unify_constant 1
+  unify_constant 2
+  proceed
+rule/1#5:
+  get_structure '**'/2 X1
+  unify_constant 2
+  unify_constant 3
+  proceed
+rule/1#6:
+  get_structure '='/2 X1
+  unify_constant a
+  unify_constant b
+  proceed
+
+% ?- name_of(X, greeting).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant greeting X2
+  call name_of/2
+  halt
+
+% ?- name_of('it\'s', K).
+query
+  name K Y1
+  allocate 1
+  put_constant 'it''s' X1
+  put_variable Y1 X2
+  call name_of/2
+  halt
+
+% ?- name_of(X, escape).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant escape X2
+  call name_of/2
+  halt
+
+% ?- name_of(X, braces).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant braces X2
+  call name_of/2
+  halt
+
+% ?- code_of(97, K).
+query
+  name K Y1
+  allocate 1
+  put_constant 97 X1
+  put_variable Y1 X2
+  call code_of/2
+  halt
+
+% ?- code_of(X, space).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant space X2
+  call code_of/2
+  halt
+
+% ?- number_of(X, hex).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant hex X2
+  call number_of/2
+  halt
+
+% ?- number_of(X, float).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant float X2
+  call number_of/2
+  halt
+
+% ?- text(S, codes).
+query
+  name S Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant codes X2
+  call text/2
+  halt
+
+% ?- curly(X).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  call curly/1
+  halt
+
+% ?- partial([a, b, c, d], T).
+query
+  name T Y1
+  allocate 1
+  put_list X5
+  set_constant d
+  set_constant []
+  put_list X4
+  set_constant c
+  set_value X5
+  put_list X3
+  set_constant b
+  set_value X4
+  put_list X1
+  set_constant a
+  set_value X3
+  put_variable Y1 X2
+  call partial/2
+  halt
+
+% ?- partial(L, [z]).
+query
+  name L Y1
+  allocate 1
+  put_variable Y1 X1
+  put_list X2
+  set_constant z
+  set_constant []
+  call partial/2
+  halt
+
+% ?- rule(===>(a, X)).
+query
+  name X Y1
+  allocate 1
+  put_structure '===>'/2 X1
+  set_constant a
+  set_variable Y1
+  call rule/1
+  halt
+
+% ?- rule(&(x, Y)).
+query
+  name Y Y1
+  allocate 1
+  put_structure '&'/2 X1
+  set_constant x
+  set_variable Y1
+  call rule/1
+  halt
+
+% ?- rule(1-2-X).
+query
+  name X Y1
+  allocate 1
+  put_structure '-'/2 X2
+  set_constant 1
+  set_constant 2
+  put_structure '-'/2 X1
+  set_value X2
+  set_variable Y1
+  call rule/1
+  halt
+
+% ?- rule(X=Y).
+query
+  name X Y1
+  name Y Y2
+  allocate 2
+  put_structure '='/2 X1
+  set_variable Y1
+  set_variable Y2
+  call rule/1
+  halt

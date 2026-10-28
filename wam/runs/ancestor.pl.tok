@@ -1,0 +1,84 @@
+% emitted by emit.pl
+
+%% parent/2
+parent/2:
+  switch_on_term parent/2#v parent/2#v fail fail
+parent/2#v:
+  try parent/2#1
+  retry parent/2#2
+  retry parent/2#3
+  trust parent/2#4
+parent/2#1:
+  get_constant tom X1
+  get_constant bob X2
+  proceed
+parent/2#2:
+  get_constant bob X1
+  get_constant ann X2
+  proceed
+parent/2#3:
+  get_constant bob X1
+  get_constant pat X2
+  proceed
+parent/2#4:
+  get_constant pat X1
+  get_constant jim X2
+  proceed
+
+%% ancestor/2
+ancestor/2:
+  try_me_else ancestor/2#2
+  get_variable X3 X1
+  get_variable X4 X2
+  put_value X3 X1
+  put_value X4 X2
+  execute parent/2
+ancestor/2#2:
+  trust_me
+  allocate 2
+  get_variable X3 X1
+  get_variable Y1 X2
+  put_value X3 X1
+  put_variable Y2 X2
+  call parent/2
+  put_unsafe_value Y2 X1
+  put_unsafe_value Y1 X2
+  deallocate
+  execute ancestor/2
+
+% ?- ancestor(tom, X).
+query
+  name X Y1
+  allocate 1
+  put_constant tom X1
+  put_variable Y1 X2
+  call ancestor/2
+  halt
+
+% ?- ancestor(X, jim).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant jim X2
+  call ancestor/2
+  halt
+
+% ?- ancestor(A, B).
+query
+  name A Y1
+  name B Y2
+  allocate 2
+  put_variable Y1 X1
+  put_variable Y2 X2
+  call ancestor/2
+  halt
+
+% ?- ancestor(ann, X).
+query
+  name X Y1
+  allocate 1
+  put_constant ann X1
+  put_variable Y1 X2
+  call ancestor/2
+  halt

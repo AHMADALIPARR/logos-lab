@@ -1,0 +1,16 @@
+X = 'Hello World'
+K = apostrophe
+X = 'tab\there'
+X = {}
+K = letter_a
+X = 32
+X = 31
+X = 3.14
+S = [104,105]
+X = {}(','(a,b))
+T = [c,d]
+L = [a,b,z]
+X = b
+Y = &(y,z)
+X = 3
+X = a, Y = b

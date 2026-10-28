@@ -64,6 +64,21 @@ cd logos_etymology
 make query
 ```
 
+## The WAM
+
+[`wam/`](wam/) is a Warren Abstract Machine written in C. It keeps the heap, the registers, the choice points, the trail and the cut, so the search and the unification live in one engine. You send it tokens from a file or a pipe, and it prints the answers, or all of them with `-all`.
+
+- `wam.c` is the engine. `-trace` prints every instruction it runs.
+- `emit.pl` reads ordinary ISO Prolog (operators, quoted atoms, lists, strings, cut, if-then-else, negation) and writes the tokens.
+- `examples/` has ancestor, append, member, cut and control programs, with their answers in `runs/`.
+
+```sh
+cd wam && make
+swipl -q emit.pl -- examples/append.pl | ./wam -all -
+```
+
+The token grammar is in [`docs/wam.md`](docs/wam.md).
+
 ## Legacy logic archive
 
 [`legacy-logic-archive/`](legacy-logic-archive/) stores historical Prolog, ALGOL, COBOL II and JOVIAL source by SHA-256 fingerprint. Each file has a record of its address, size, time and rights. `bin/collect.sh` fetches approved sources, `bin/verify.sh` re-hashes everything, and `research/` holds the notes on each phase, from NASA Prolog to the Mark I Perceptron.

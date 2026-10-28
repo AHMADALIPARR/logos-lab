@@ -26,6 +26,7 @@ logic_stack_full_haskell|logic_stack/full|sh -c 'D=\$(mktemp -d) && ghc -O2 -out
 exec_lock|exec_lock|swipl -q -g "use_module(trust_gate),demo" -t halt
 boogie_ext|logic_kernels/boogie_ext|sh -c '. ./env.sh && make verify | tail -3 && git checkout -q VERIFY.log'
 legacy_archive|legacy-logic-archive|sh bin/verify.sh
+wam|wam|sh -c 'make -s all compare | tail -5'
 logic_stack_mini_ocaml|logic_stack/mini|sh -c 'D=\$(mktemp -d) && cp logicstack.ml \$D && (cd \$D && ocamlopt logicstack.ml -o ls >/dev/null 2>\&1 ) && \$D/ls'
 logic_stack_full_ocaml|logic_stack/full|sh -c 'D=\$(mktemp -d) && cp logicstack.ml \$D && (cd \$D && ocamlopt logicstack.ml -o ls >/dev/null 2>\&1 ) && \$D/ls'
 logos_real|logos_real|ruby test/test.rb

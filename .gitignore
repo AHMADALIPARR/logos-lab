@@ -17,3 +17,6 @@ __pycache__/
 why3session.xml
 why3shapes.gz
 *.why3session
+
+# built engine
+wam/wam

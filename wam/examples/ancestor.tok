@@ -1,0 +1,89 @@
+% SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+% Copyright Ahmad Ali Parr
+
+% ancestor.tok -- facts, a recursive rule, and backtracking over all answers
+%
+% Etymology: ancestor, Latin antecessor "one who goes before"
+% (ante "before" + cedere "to go").
+%
+% Usage:
+%   ./wam -all examples/ancestor.tok
+%
+%   parent(tom, bob).  parent(bob, ann).  parent(bob, pat).  parent(pat, jim).
+%   ancestor(X, Y) :- parent(X, Y).
+%   ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+
+%% ── parent/2: four facts, one choice point chain ──────────────────────────
+parent/2:
+  try_me_else parent/2#2
+  get_constant tom X1
+  get_constant bob X2
+  proceed
+parent/2#2:
+  retry_me_else parent/2#3
+  get_constant bob X1
+  get_constant ann X2
+  proceed
+parent/2#3:
+  retry_me_else parent/2#4
+  get_constant bob X1
+  get_constant pat X2
+  proceed
+parent/2#4:
+  trust_me
+  get_constant pat X1
+  get_constant jim X2
+  proceed
+
+%% ── ancestor/2 ────────────────────────────────────────────────────────────
+ancestor/2:
+  try_me_else ancestor/2#2
+  execute parent/2           % X1, X2 are already X and Y
+ancestor/2#2:
+  trust_me
+  allocate 2                 % Y1 = Y, Y2 = Z
+  get_variable Y1 X2
+  put_variable Y2 X2         % parent(X, Z)
+  call parent/2
+  put_unsafe_value Y2 X1     % ancestor(Z, Y)
+  put_value Y1 X2
+  deallocate
+  execute ancestor/2
+
+%% ── Queries ───────────────────────────────────────────────────────────────
+% ?- ancestor(tom, X).
+query
+  name X Y1
+  allocate 1
+  put_constant tom X1
+  put_variable Y1 X2
+  call ancestor/2
+  halt
+
+% ?- ancestor(X, jim).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_constant jim X2
+  call ancestor/2
+  halt
+
+% ?- ancestor(A, B).
+query
+  name A Y1
+  name B Y2
+  allocate 2
+  put_variable Y1 X1
+  put_variable Y2 X2
+  call ancestor/2
+  halt
+
+% ?- ancestor(ann, X).
+query
+  name X Y1
+  allocate 1
+  put_constant ann X1
+  put_variable Y1 X2
+  call ancestor/2
+  halt

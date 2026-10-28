@@ -1,0 +1,93 @@
+% emitted by emit.pl
+
+%% member/2
+member/2:
+  try_me_else member/2#2
+  get_variable X3 X1
+  get_list X2
+  unify_local_value X3
+  unify_void 1
+  proceed
+member/2#2:
+  trust_me
+  get_variable X3 X1
+  get_list X2
+  unify_void 1
+  unify_variable X4
+  put_value X3 X1
+  put_value X4 X2
+  execute member/2
+
+% ?- member(X, [a, b, c]).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_list X4
+  set_constant c
+  set_constant []
+  put_list X3
+  set_constant b
+  set_value X4
+  put_list X2
+  set_constant a
+  set_value X3
+  call member/2
+  halt
+
+% ?- member(b, [a, b, c]).
+query
+  allocate 0
+  put_constant b X1
+  put_list X4
+  set_constant c
+  set_constant []
+  put_list X3
+  set_constant b
+  set_value X4
+  put_list X2
+  set_constant a
+  set_value X3
+  call member/2
+  halt
+
+% ?- member(z, [a, b, c]).
+query
+  allocate 0
+  put_constant z X1
+  put_list X4
+  set_constant c
+  set_constant []
+  put_list X3
+  set_constant b
+  set_value X4
+  put_list X2
+  set_constant a
+  set_value X3
+  call member/2
+  halt
+
+% ?- member(X, [a, b, c]), member(X, [c, b]).
+query
+  name X Y1
+  allocate 1
+  put_variable Y1 X1
+  put_list X4
+  set_constant c
+  set_constant []
+  put_list X3
+  set_constant b
+  set_value X4
+  put_list X2
+  set_constant a
+  set_value X3
+  call member/2
+  put_value Y1 X1
+  put_list X3
+  set_constant b
+  set_constant []
+  put_list X2
+  set_constant c
+  set_value X3
+  call member/2
+  halt

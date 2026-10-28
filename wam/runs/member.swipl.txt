@@ -1,0 +1,7 @@
+X = a
+X = b
+X = c
+true
+false
+X = b
+X = c

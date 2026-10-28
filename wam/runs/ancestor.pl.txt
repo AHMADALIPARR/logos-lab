@@ -1,0 +1,16 @@
+X = bob
+X = ann
+X = pat
+X = jim
+X = pat
+X = tom
+X = bob
+A = tom, B = bob
+A = bob, B = ann
+A = bob, B = pat
+A = pat, B = jim
+A = tom, B = ann
+A = tom, B = pat
+A = tom, B = jim
+A = bob, B = jim
+false
