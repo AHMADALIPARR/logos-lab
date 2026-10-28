@@ -108,7 +108,6 @@ The `parent/2` facts from `logic_kernels/metagol.pl` and the `ancestor/2` rules 
 
 Lamps for the six goal forms of the engine and the five kernels, with `ANCESTOR(ADA,X).` punched on a card.
 
-`scripts/make_images.py` draws all four pictures with Pillow, and the terminal answers come from running `swipl` on the repo's facts.
 
 ## Packing
 
