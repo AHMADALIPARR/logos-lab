@@ -12,4 +12,30 @@ module LogosLexicon
     match xs with Nil -> 0 | Cons _ tail -> 1 + slice_count tail end
   let function identity (x: lexeme) : lexeme = x
     ensures { result = x }
+
+  (* ── Morphemes, derivation edges, senses ─────────────────────────────────── *)
+  type morpheme = { position: int; form: string; kind: string; morpheme_source: string }
+  type derivation = { descendant: string; ancestor: string; edge_source: string }
+  type sense = { sense_id: string; gloss: string; sense_source: string }
+
+  (* ── Evidence ──────────────────────────────────────────────────────────────
+     seed_unverified is not evidence. Only an edge with a real source counts. *)
+  predicate evidenced (d: derivation) = d.edge_source <> "seed_unverified"
+
+  (* ── Counting ────────────────────────────────────────────────────────────── *)
+  let rec function morpheme_count (xs: list morpheme) : int =
+    match xs with Nil -> 0 | Cons _ tail -> 1 + morpheme_count tail end
+
+  let rec lemma slice_count_nonneg (xs: list slice) : unit
+    variant { xs }
+    ensures { slice_count xs >= 0 }
+  = match xs with Nil -> () | Cons _ tail -> slice_count_nonneg tail end
+
+  let rec lemma morpheme_count_nonneg (xs: list morpheme) : unit
+    variant { xs }
+    ensures { morpheme_count xs >= 0 }
+  = match xs with Nil -> () | Cons _ tail -> morpheme_count_nonneg tail end
+
+  let function letters (x: lexeme) : int = slice_count x.slices
+    ensures { result >= 0 }
 end

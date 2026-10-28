@@ -1,0 +1,10 @@
+descendant	ancestor	source
+en_logic	enm_logik	wiktionary_logic
+enm_logik	fro_logike	wiktionary_logic
+fro_logike	la_logica	wiktionary_logic
+la_logica	grc_logike	wiktionary_logic
+grc_logike	grc_logikos	wiktionary_logic
+grc_logikos	grc_logos	wiktionary_logic
+grc_logos	ine_leg	wiktionary_logos_grc
+grc_lego	ine_leg	wiktionary_lego_grc
+en_logos	grc_logos	wiktionary_logos_en

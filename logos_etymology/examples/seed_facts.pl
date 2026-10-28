@@ -1,3 +1,4 @@
+:- discontiguous lexeme/3, etymology_text/3, orthographic_slice/3.
 lexeme(w_logic,en,'logic').
 etymology_text(w_logic,'Historical derivation to be sourced and checked.',seed_unverified).
 orthographic_slice(w_logic,1,'l').

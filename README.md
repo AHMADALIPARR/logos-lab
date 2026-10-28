@@ -44,14 +44,14 @@ Logic programming is the idea that a program can be a set of facts and rules, an
 
 [`logos_etymology/`](logos_etymology/) turns a word table into Prolog facts.
 
-- `ingest.awk` reads `id, language, word, etymology, source` and writes `lexeme/3`, `etymology_text/3` and one `orthographic_slice/3` fact per letter.
-- `axioms.pl` holds the rules: `ancestor/2` follows `derived_from/3` without looping, and `shared_root/3` links words that share a root morpheme.
-- `LogosLexicon.mlw` is the typed model of a lexeme and its slices.
+- `ingest.awk` reads four tables (words, derivation edges, morphemes, senses) and writes the matching Prolog facts, one source on every row.
+- `axioms.pl` holds the rules: `ancestor/2` and `ancestor_via/3` follow `derived_from/3` without looping, `shared_root/3` and `shared_ancestor/3` link related words, and `segmentation/2`, `gloss/2` and `spelling/2` read a word back.
+- `LogosLexicon.mlw` is the typed model of a lexeme, its slices, morphemes, edges and senses.
 - Every derivation edge carries its source, so each answer traces back to evidence.
 
 ```sh
-awk -f src/ingest.awk data/seed.tsv > examples/seed_facts.pl
-swipl -q -s src/axioms.pl -s examples/seed_facts.pl
+cd logos_etymology
+make query
 ```
 
 ## Legacy logic archive

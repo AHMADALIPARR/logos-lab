@@ -57,6 +57,56 @@ ancestor_path(A,B,Seen) :- derived_from(A,C,_), \+ memberchk(C,Seen), (B=C ; anc
 
 shared_root(A,B,R) :- morpheme(A,_,R,root,_), morpheme(B,_,R,root,_), dif(A,B).
 
+%% ── Evidence along the chain ──────────────────────────────────────────────────
+%%
+%% ancestor_via(+Word, ?Ancestor, -Sources)
+%%
+%% Same walk as ancestor/2, but it hands back the source of every edge it
+%% crossed, in order. Every answer traces back to where it came from.
+
+ancestor_via(A,B,Sources) :- via_path(A,B,[A],Sources).
+
+via_path(A,B,_,[S])       :- derived_from(A,B,S).
+via_path(A,B,Seen,[S|Ss]) :- derived_from(A,C,S), \+ memberchk(C,Seen), via_path(C,B,[C|Seen],Ss).
+
+%% ── Shared ancestry ───────────────────────────────────────────────────────────
+%%
+%% shared_ancestor(?WordA, ?WordB, ?Ancestor)
+%%
+%% Two different words whose recorded chains meet at the same ancestor.
+%% Both chains are asserted edges. Nothing is guessed from spelling.
+
+shared_ancestor(A,B,X) :- ancestor(A,X), ancestor(B,X), dif(A,B).
+
+%% ── Roots and segmentation ────────────────────────────────────────────────────
+%%
+%% root_of(?Word, ?Root): a root morpheme the word carries.
+%% segmentation(+Word, -Forms): its morphemes in order of position.
+
+root_of(W,R) :- morpheme(W,_,R,root,_).
+
+segmentation(W,Forms) :-
+    findall(P-F, morpheme(W,P,F,_,_), Pairs),
+    Pairs \== [],
+    msort(Pairs, Sorted),
+    findall(F, member(_-F, Sorted), Forms).
+
+%% ── Meaning ───────────────────────────────────────────────────────────────────
+%%
+%% gloss(?Word, ?Gloss): any recorded sense of the word.
+
+gloss(W,G) :- sense(W,_,G,_).
+
+%% ── Spelling ──────────────────────────────────────────────────────────────────
+%%
+%% spelling(+Word, -Letters): the word's orthographic slices, in order.
+
+spelling(W,Letters) :-
+    findall(P-L, orthographic_slice(W,P,L), Pairs),
+    Pairs \== [],
+    msort(Pairs, Sorted),
+    findall(L, member(_-L, Sorted), Letters).
+
 %% ── What is never inferred ────────────────────────────────────────────────────
 %%
 %% No rule infers historical derivation from orthographic similarity.

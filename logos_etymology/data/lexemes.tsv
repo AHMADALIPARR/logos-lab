@@ -1,0 +1,12 @@
+id	language	word	etymology	source
+en_logic	en	logic	From Middle English logik, from Old French logike, from Latin logica, from Ancient Greek λογική, from feminine of λογικός, from λόγος.	wiktionary_logic
+enm_logik	enm	logik	From Old French logike.	wiktionary_logic
+fro_logike	fro	logike	From Latin logica.	wiktionary_logic
+la_logica	la	logica	From Ancient Greek λογική.	wiktionary_logic
+grc_logike	grc	λογική	Feminine of λογικός.	wiktionary_logic
+grc_logikos	grc	λογικός	From λόγος.	wiktionary_logic
+grc_logos	grc	λόγος	From Proto-Hellenic *lógos, from Proto-Indo-European *leǵ- (to collect words).	wiktionary_logos_grc
+grc_lego	grc	λέγω	From Proto-Hellenic *légō, from Proto-Indo-European *leǵ- (to collect, gather).	wiktionary_lego_grc
+ine_leg	ine_pro	*leǵ-	Proto-Indo-European root, to collect, gather.	wiktionary_lego_grc
+en_logos	en	logos	From Ancient Greek λόγος.	wiktionary_logos_en
+en_reconstruction	en	reconstruction	re- + construction.	wiktionary_reconstruction

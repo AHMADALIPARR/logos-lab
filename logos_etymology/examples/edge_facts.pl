@@ -1,0 +1,9 @@
+derived_from(en_logic,enm_logik,wiktionary_logic).
+derived_from(enm_logik,fro_logike,wiktionary_logic).
+derived_from(fro_logike,la_logica,wiktionary_logic).
+derived_from(la_logica,grc_logike,wiktionary_logic).
+derived_from(grc_logike,grc_logikos,wiktionary_logic).
+derived_from(grc_logikos,grc_logos,wiktionary_logic).
+derived_from(grc_logos,ine_leg,wiktionary_logos_grc).
+derived_from(grc_lego,ine_leg,wiktionary_lego_grc).
+derived_from(en_logos,grc_logos,wiktionary_logos_en).
