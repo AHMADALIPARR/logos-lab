@@ -1,0 +1,108 @@
+Boogie: Boogie program verifier version 3.5.8.0, Copyright (c) 2003-2014, Microsoft.
+Z3: Z3 version 4.12.1 - 64 bit
+Date: 2026-10-28T04:28:04-07:00
+
+=== sums.bpl ===
+
+Boogie program verifier finished with 19 verified, 0 errors
+check: verified
+
+=== arrays.bpl ===
+
+Boogie program verifier finished with 9 verified, 0 errors
+check: verified
+
+=== unify.bpl ===
+
+Boogie program verifier finished with 21 verified, 0 errors
+check: verified
+
+=== reach.bpl ===
+
+Boogie program verifier finished with 14 verified, 0 errors
+check: verified
+
+=== parity.bpl ===
+
+Boogie program verifier finished with 4 verified, 0 errors
+check: verified
+
+=== foil.bpl ===
+
+Boogie program verifier finished with 14 verified, 0 errors
+check: verified
+
+=== negative/sums_neg.bpl (must be rejected) ===
+negative/sums_neg.bpl(13,3): Error: a postcondition could not be proved on this return path
+negative/sums_neg.bpl(8,3): Related location: this is the postcondition that could not be proved
+Execution trace:
+    negative/sums_neg.bpl(11,5): anon0
+    negative/sums_neg.bpl(13,3): anon2_LoopHead
+    negative/sums_neg.bpl(13,3): anon2_LoopDone
+negative/sums_neg.bpl(15,5): Error: this invariant could not be proved to be maintained by the loop
+Execution trace:
+    negative/sums_neg.bpl(11,5): anon0
+    negative/sums_neg.bpl(13,3): anon2_LoopHead
+    negative/sums_neg.bpl(17,7): anon2_LoopBody
+
+Boogie program verifier finished with 0 verified, 2 errors
+check: rejected
+
+=== negative/arrays_neg.bpl (must be rejected) ===
+negative/arrays_neg.bpl(15,5): Error: this loop invariant could not be proved on entry
+Execution trace:
+    negative/arrays_neg.bpl(11,5): anon0
+negative/arrays_neg.bpl(15,5): Error: this invariant could not be proved to be maintained by the loop
+Execution trace:
+    negative/arrays_neg.bpl(11,5): anon0
+    negative/arrays_neg.bpl(13,3): anon4_LoopHead
+    negative/arrays_neg.bpl(17,5): anon4_LoopBody
+    negative/arrays_neg.bpl(20,9): anon5_Else
+
+Boogie program verifier finished with 0 verified, 2 errors
+check: rejected
+
+=== negative/unify_neg.bpl (must be rejected) ===
+negative/unify_neg.bpl(76,3): Error: a postcondition could not be proved on this return path
+negative/unify_neg.bpl(71,3): Related location: this is the postcondition that could not be proved
+Execution trace:
+    negative/unify_neg.bpl(73,3): anon0
+    negative/unify_neg.bpl(74,5): anon2_Then
+
+Boogie program verifier finished with 0 verified, 1 error
+check: rejected
+
+=== negative/reach_neg.bpl (must be rejected) ===
+negative/reach_neg.bpl(33,5): Error: this loop invariant could not be proved on entry
+Execution trace:
+    negative/reach_neg.bpl(27,5): anon0
+
+Boogie program verifier finished with 0 verified, 1 error
+check: rejected
+
+=== negative/parity_neg.bpl (must be rejected) ===
+negative/parity_neg.bpl(23,3): Error: a postcondition could not be proved on this return path
+negative/parity_neg.bpl(18,3): Related location: this is the postcondition that could not be proved
+Execution trace:
+    negative/parity_neg.bpl(21,5): anon0
+    negative/parity_neg.bpl(23,3): anon2_LoopHead
+    negative/parity_neg.bpl(23,3): anon2_LoopDone
+negative/parity_neg.bpl(25,5): Error: this invariant could not be proved to be maintained by the loop
+Execution trace:
+    negative/parity_neg.bpl(21,5): anon0
+    negative/parity_neg.bpl(23,3): anon2_LoopHead
+    negative/parity_neg.bpl(27,9): anon2_LoopBody
+
+Boogie program verifier finished with 0 verified, 2 errors
+check: rejected
+
+=== negative/foil_neg.bpl (must be rejected) ===
+negative/foil_neg.bpl(28,1): Error: a postcondition could not be proved on this return path
+negative/foil_neg.bpl(26,3): Related location: this is the postcondition that could not be proved
+Execution trace:
+    negative/foil_neg.bpl(28,1): anon0
+
+Boogie program verifier finished with 0 verified, 1 error
+check: rejected
+
+RESULT: all files verified, all negative examples rejected
