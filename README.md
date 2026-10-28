@@ -100,7 +100,7 @@ Six files of Boogie proofs: sums and number theory, arrays and sorting, the unif
 
 ### `exec_lock/`: the execution lock
 
-Three layers that every agent state change passes: `schema.owl` (the ontology, with `ProvenSignal` and `Noise` disjoint and exactly one WORM hash per execution), `trust_gate.pl` (who may use what, and `shrew_cut/3`, which answers `sker_noise` for any signal missing from the ontology) and `state_trap.bpl` (the token and memory limits proved in Boogie).
+Three layers that every agent state change passes: `schema.owl` (the ontology, with `ProvenSignal` and `Noise` disjoint and exactly one WORM hash per execution, plus the etymology rules: derivation chains are transitive and never loop, words with the same root share it, and every edge, morpheme and sense needs a real source), `trust_gate.pl` (who may use what, and `shrew_cut/3`, which answers `sker_noise` for any signal missing from the ontology) and `state_trap.bpl` (the token and memory limits proved in Boogie).
 
 ### `legacy-logic-archive/`: preservation
 
