@@ -1,29 +1,47 @@
 # logos-lab
 
-A logic-programming prediction bot. It reasons with rules and facts, and uses logic engines and proof tools to work out what follows from what it knows.
+Logic programming, from a unifier to a lexicon. Facts and rules go in, and answers come out by unification and search.
 
-## What's inside
+## The engine
 
-| Folder | What it is |
-|---|---|
-| [`logos_whyml/`](logos_whyml/) | `Logos.mlw`, the bot's core: a microKanren-style unifier and goal interpreter written in WhyML for Why3. |
-| [`logic_kernels/`](logic_kernels/) | Five small reasoning kernels, one each for Metagol, Twelf, Boogie, Logica and DLV. |
-| [`logos_etymology/`](logos_etymology/) | Word-origins compiler: AWK slices words into letters, Prolog rules relate them, WhyML holds the typed specification. |
-| [`legacy-logic-archive/`](legacy-logic-archive/) | Scripts and source lists for collecting historical Prolog, ALGOL, COBOL and JOVIAL code, stored by SHA-256 fingerprint with its origin and rights. |
+[`logos_whyml/Logos.mlw`](logos_whyml/Logos.mlw) is a microKanren-style engine written in WhyML for Why3.
 
-## How it works
+- **Terms:** variables, atoms, pairs and nil.
+- **Substitutions:** a list of bindings. `walk` follows a variable through them, and `occurs` is the occurs check.
+- **`unify`:** matches two terms and extends the substitution, or fails.
+- **Goals:** `Success`, `Failure`, `Eq`, `Conj` (and), `Disj` (or) and `Delay`.
+- **`solve`:** runs a goal against a substitution and returns every answer, with a fuel counter so every call ends.
 
-Facts and rules go in. The engine matches terms, searches for answers, and the bot predicts what follows. The kernels give it five different ways to reason: learning programs from examples (Metagol), proof search (Twelf), program checking (Boogie), rules to SQL (Logica), and choice problems (DLV).
+## Five kernels
 
-## Run it
+[`logic_kernels/`](logic_kernels/) shows one small program in each of five logic systems.
+
+| File | System | What it does |
+|---|---|---|
+| `metagol.pl` | Metagol | Learns `ancestor/2` from `parent/2` and positive and negative examples |
+| `twelf.elf` | Twelf | Proves `path a c` by chaining edges `a b` and `b c` |
+| `boogie.bpl` | Boogie | Proves a loop sums 1 to n as n(n+1)/2, using loop invariants |
+| `logica.l` | Logica | Two-hop reachability over a small graph, compiled to SQL |
+| `dlv.dl` | DLV | Assigns each task to the CPU or the GPU, exactly one of the two |
+
+## Etymology
+
+[`logos_etymology/`](logos_etymology/) turns a word table into Prolog facts.
+
+- `ingest.awk` reads `id, language, word, etymology, source` and writes `lexeme/3`, `etymology_text/3` and one `orthographic_slice/3` fact per letter.
+- `axioms.pl` holds the rules: `ancestor/2` follows `derived_from/3` without looping, and `shared_root/3` links words that share a root morpheme.
+- `LogosLexicon.mlw` is the typed model of a lexeme and its slices.
+- Every derivation edge carries its source, so each answer traces back to evidence.
 
 ```sh
-why3 prove logos_whyml/Logos.mlw
-
-awk -f logos_etymology/src/ingest.awk logos_etymology/data/seed.tsv > /tmp/seed_facts.pl
-swipl -q -s logos_etymology/src/axioms.pl -s /tmp/seed_facts.pl
-
-cd legacy-logic-archive && bash bin/verify.sh
+awk -f src/ingest.awk data/seed.tsv > examples/seed_facts.pl
+swipl -q -s src/axioms.pl -s examples/seed_facts.pl
 ```
 
-Each kernel in `logic_kernels/` is run with its own tool, for example `boogie boogie.bpl` or `dlv -filter=assign dlv.dl`.
+## Legacy logic archive
+
+[`legacy-logic-archive/`](legacy-logic-archive/) stores historical Prolog, ALGOL, COBOL II and JOVIAL source by SHA-256 fingerprint. Each file has a record of its address, size, time and rights. `bin/collect.sh` fetches approved sources, `bin/verify.sh` re-hashes everything, and `research/` holds the notes on each phase, from NASA Prolog to the Mark I Perceptron.
+
+```sh
+cd legacy-logic-archive && bash bin/verify.sh
+```
