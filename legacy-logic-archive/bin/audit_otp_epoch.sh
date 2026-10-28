@@ -1,4 +1,6 @@
 #!/bin/sh
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+# Copyright Ahmad Ali Parr
 set -eu
 if [ "$#" -ne 2 ]; then echo 'Usage: audit_otp_epoch.sh REPOSITORY_PATH TAG_OR_COMMIT' >&2; exit 2; fi
 repo=$1; revision=$2

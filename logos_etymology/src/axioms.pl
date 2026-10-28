@@ -1,3 +1,5 @@
+% SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+% Copyright Ahmad Ali Parr
 % Source-aware relations: only assert evidence-backed edges.
 :- dynamic lexeme/3, etymology_text/3, orthographic_slice/3.
 :- dynamic derived_from/3, morpheme/5, sense/4.

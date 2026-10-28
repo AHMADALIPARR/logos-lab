@@ -1,3 +1,5 @@
+% SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+% Copyright Ahmad Ali Parr
 % DLV kernel: choose exactly one of two processors per task.
 task(t1). task(t2).
 processor(cpu). processor(gpu).

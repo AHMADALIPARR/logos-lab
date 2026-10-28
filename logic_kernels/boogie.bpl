@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+// Copyright Ahmad Ali Parr
 // Boogie kernel: verify a summation loop.
 procedure SumTo(n: int) returns (s: int)
   requires 0 <= n;

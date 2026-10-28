@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+# Copyright Ahmad Ali Parr
 # POSIX awk: TSV columns id,language,word,etymology,source
 # This is an exact orthographic slice, NOT a morphological segmentation.
 BEGIN { FS="\t"; OFS="\t" }

@@ -1,0 +1,19 @@
+# build output
+dist/
+*.tar.gz
+*.sha256
+
+# editors and system files
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Python and Why3 scratch
+__pycache__/
+*.pyc
+.venv*/
+why3session.xml
+why3shapes.gz
+*.why3session
