@@ -82,13 +82,25 @@ One tiny program per system, each showing a different way of getting to an answe
 
 Words become facts, and every derivation carries the source it came from. The rules read those facts: `ancestor/2` walks the derivation chain and `shared_root/3` connects words with a common root. The lab uses it as a small model of knowledge where every answer can be traced back to its evidence.
 
+### `logos_prolog/`: the lexicon and the deduction engine
+
+`logos.pl` holds the lexicon (words, senses, evidence, relations, segmentations), unification with an occurs check, depth-bounded Horn resolution, finite-domain constraints, exact probability over finite worlds, semirings and a causal transition system. `logos_deduction.pl` holds fixed points, stratified negation, graph search, finite-trace temporal logic and provenance.
+
 ### `logos_real/`: the word graph in Ruby
 
 A Ruby tool that reads dictionary entries (Wiktextract JSONL or TEI XML) and builds a knowledge graph where every claim keeps its source. It has its own Horn engine with unification and an occurs check, depth-bounded search, a query command, and an export to Prolog facts.
 
 ### `logic_stack/`: binary to tree
 
-`LOGIC_STACK.md` is the full stack document, kept whole: bits, logic, FOIL, Metagol and the decision tree, with the kernels in Prolog, Haskell, OCaml and C.
+`LOGIC_STACK.md` is the full stack document, kept whole: bits, logic, FOIL, Metagol and the decision tree. `mini/` and `full/` hold the programs in Prolog, Haskell, OCaml and C, and `runs/` holds what each one printed. Every program learns the same thing from the same examples: 4-bit odd parity as two rules that compare bits 0 and 1 against bits 2 and 3, then the invented `inv1` (two steps of successor) and its tail-recursive form that covers every positive example.
+
+### `logic_kernels/boogie_ext/`: proofs
+
+Six files of Boogie proofs: sums and number theory, arrays and sorting, the unifier, reachability, odd parity and FOIL gain. Each has a wrong version in `negative/` that Boogie rejects, and `VERIFY.log` has the output. `logos_boogie_arithmetic_2500.bpl` is the arithmetic obligation set.
+
+### `exec_lock/`: the execution lock
+
+Three layers that every agent state change passes: `schema.owl` (the ontology, with `ProvenSignal` and `Noise` disjoint and exactly one WORM hash per execution), `trust_gate.pl` (who may use what, and `shrew_cut/3`, which answers `sker_noise` for any signal missing from the ontology) and `state_trap.bpl` (the token and memory limits proved in Boogie).
 
 ### `legacy-logic-archive/`: preservation
 
