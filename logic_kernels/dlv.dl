@@ -1,0 +1,6 @@
+% DLV kernel: choose exactly one of two processors per task.
+task(t1). task(t2).
+processor(cpu). processor(gpu).
+assign(T,cpu) v assign(T,gpu) :- task(T).
+:- assign(T,cpu), assign(T,gpu).
+% Show assignments using the DLV option -filter=assign

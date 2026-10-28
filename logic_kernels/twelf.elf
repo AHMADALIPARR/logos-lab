@@ -1,0 +1,15 @@
+% Twelf kernel: proofs of transitivity for a reachability relation.
+node : type.
+a : node.
+b : node.
+c : node.
+edge : node -> node -> type.
+eab : edge a b.
+ebc : edge b c.
+
+path : node -> node -> type.
+path/edge : edge X Y -> path X Y.
+path/step : edge X Y -> path Y Z -> path X Z.
+
+abc : path a c = path/step eab (path/edge ebc).
+%query 1 1 path a c.

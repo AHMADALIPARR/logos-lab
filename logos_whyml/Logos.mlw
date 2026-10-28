@@ -1,0 +1,96 @@
+module Logos
+  use int.Int
+  use list.List
+  use list.Length
+  use option.Option
+
+  type term =
+    | Var int
+    | Atom int
+    | Pair term term
+    | Nil
+
+  type binding = { key: int; value: term }
+  type subst = list binding
+
+  let rec lookup (x:int) (s:subst) : option term
+    variant { s }
+  = match s with
+    | Nil -> None
+    | Cons b tail -> if b.key = x then Some b.value else lookup x tail
+    end
+
+  let rec walk (fuel:int) (t:term) (s:subst) : term
+    requires { fuel >= 0 }
+    variant { fuel }
+  = if fuel = 0 then t else
+    match t with
+    | Var x -> (match lookup x s with
+       | None -> t
+       | Some v -> walk (fuel-1) v s
+       end)
+    | _ -> t
+    end
+
+  let rec occurs (fuel:int) (x:int) (t:term) (s:subst) : bool
+    requires { fuel >= 0 }
+    variant { fuel }
+  = if fuel = 0 then true else
+    match walk fuel t s with
+    | Var y -> x = y
+    | Pair a b -> occurs (fuel-1) x a s || occurs (fuel-1) x b s
+    | _ -> false
+    end
+
+  let rec unify (fuel:int) (a:term) (b:term) (s:subst) : option subst
+    requires { fuel >= 0 }
+    variant { fuel }
+  = if fuel = 0 then None else
+    let x = walk fuel a s in
+    let y = walk fuel b s in
+    if x = y then Some s else
+    match x,y with
+    | Var i, _ -> if occurs fuel i y s then None else Some (Cons {key=i;value=y} s)
+    | _, Var i -> if occurs fuel i x s then None else Some (Cons {key=i;value=x} s)
+    | Pair a1 a2, Pair b1 b2 ->
+      (match unify (fuel-1) a1 b1 s with
+       | None -> None
+       | Some s1 -> unify (fuel-1) a2 b2 s1
+       end)
+    | _,_ -> None
+    end
+
+  type goal =
+    | Success
+    | Failure
+    | Eq term term
+    | Conj goal goal
+    | Disj goal goal
+    | Delay goal
+
+  let rec solve (fuel:int) (g:goal) (s:subst) : list subst
+    requires { fuel >= 0 }
+    variant { fuel }
+  = if fuel = 0 then Nil else
+    match g with
+    | Success -> Cons s Nil
+    | Failure -> Nil
+    | Eq a b -> (match unify fuel a b s with
+        | None -> Nil
+        | Some s1 -> Cons s1 Nil
+      end)
+    | Disj a b -> append (solve (fuel-1) a s) (solve (fuel-1) b s)
+    | Conj a b -> bind_solutions (fuel-1) b (solve (fuel-1) a s)
+    | Delay a -> solve (fuel-1) a s
+    end
+
+  with bind_solutions (fuel:int) (g:goal) (xs:list subst) : list subst
+    requires { fuel >= 0 }
+    variant { fuel, xs }
+  = if fuel = 0 then Nil else
+    match xs with
+    | Nil -> Nil
+    | Cons s tail -> append (solve (fuel-1) g s) (bind_solutions (fuel-1) g tail)
+    end
+
+end
