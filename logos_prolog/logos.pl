@@ -521,11 +521,15 @@ lexical_edge(translation_of).
 lexical_edge(semantic_shift).
 lexical_edge(compound_of).
 
-valid_edge_type(Type) :-
-    historical_edge(Type).
-
-valid_edge_type(Type) :-
-    lexical_edge(Type).
+valid_edge_type(derived_from).
+valid_edge_type(borrowed_from).
+valid_edge_type(inherited_from).
+valid_edge_type(calqued_from).
+valid_edge_type(cognate_of).
+valid_edge_type(related_to).
+valid_edge_type(translation_of).
+valid_edge_type(semantic_shift).
+valid_edge_type(compound_of).
 
 insert_relation(
     state(W, S, E, R, M),
