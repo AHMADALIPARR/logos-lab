@@ -84,7 +84,7 @@ Words become facts, and every derivation carries the source it came from. The ru
 
 ### `logos_real/`: the word graph in Ruby
 
-A Ruby tool that reads dictionary entries (Wiktextract JSONL or TEI XML) and builds a knowledge graph where every claim keeps its source. It has its own Horn engine with unification and an occurs check, depth-bounded search, a query command, and an export to Prolog facts. See its own README for the commands.
+A Ruby tool that reads dictionary entries (Wiktextract JSONL or TEI XML) and builds a knowledge graph where every claim keeps its source. It has its own Horn engine with unification and an occurs check, depth-bounded search, a query command, and an export to Prolog facts.
 
 ### `logic_stack/`: binary to tree
 
