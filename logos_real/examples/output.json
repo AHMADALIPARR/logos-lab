@@ -1,0 +1,335 @@
+{
+  "version": "1.0.0",
+  "sources": [
+    {
+      "id": "95700b049613a4cd9da8d15f",
+      "name": "Wiktextract",
+      "locator": "/mnt/data/logos_real/examples/sample.jsonl",
+      "license": "unknown",
+      "kind": "dataset"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "057e1ed9e572fd0dae48dcde",
+      "source": "95700b049613a4cd9da8d15f",
+      "reference": "jsonl:1:en:reconstruction:noun",
+      "statement": "Wiktextract lexical record",
+      "confidence": "reported"
+    },
+    {
+      "id": "ce534ddf246db3d2f3ead7fb",
+      "source": "95700b049613a4cd9da8d15f",
+      "reference": "jsonl:2:en:logic:noun",
+      "statement": "Wiktextract lexical record",
+      "confidence": "reported"
+    }
+  ],
+  "entries": [
+    {
+      "id": "297401a141ee06ca4c099aed",
+      "word": "reconstruction",
+      "lang": "en",
+      "pos": "noun",
+      "etymology_number": 0,
+      "evidence": [
+        "057e1ed9e572fd0dae48dcde"
+      ]
+    },
+    {
+      "id": "63b9c225ee5fa268f3891df3",
+      "word": "logic",
+      "lang": "en",
+      "pos": "noun",
+      "etymology_number": 0,
+      "evidence": [
+        "ce534ddf246db3d2f3ead7fb"
+      ]
+    }
+  ],
+  "senses": [
+    {
+      "id": "444fab610c4eb24fe4c1efef",
+      "entry": "297401a141ee06ca4c099aed",
+      "gloss": "the act of constructing again",
+      "index": "0.0",
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "f5b8c33a338415049e512e72",
+      "entry": "63b9c225ee5fa268f3891df3",
+      "gloss": "the study of valid inference",
+      "index": "0.0",
+      "evidence": "ce534ddf246db3d2f3ead7fb"
+    }
+  ],
+  "slices": [
+    {
+      "id": "4108da2264eed552e90db131",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 0,
+      "value": "r",
+      "start": 0,
+      "stop": 1,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "ee6caf7fbcbb724f156b9039",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 1,
+      "value": "e",
+      "start": 1,
+      "stop": 2,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "d509674cd639c1ac55348bb5",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 2,
+      "value": "c",
+      "start": 2,
+      "stop": 3,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "b8932da4982350edd100c688",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 3,
+      "value": "o",
+      "start": 3,
+      "stop": 4,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "583f8b9c1e7f7986203c8d5c",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 4,
+      "value": "n",
+      "start": 4,
+      "stop": 5,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "bddb8f4711b546dfdc59870b",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 5,
+      "value": "s",
+      "start": 5,
+      "stop": 6,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "2722c04b665dc2e05dda0f11",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 6,
+      "value": "t",
+      "start": 6,
+      "stop": 7,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "f71628845c0b3114727676c7",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 7,
+      "value": "r",
+      "start": 7,
+      "stop": 8,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "153679431c12f648b424683c",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 8,
+      "value": "u",
+      "start": 8,
+      "stop": 9,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "15831c1087d2ec1b5465c6a1",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 9,
+      "value": "c",
+      "start": 9,
+      "stop": 10,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "6aa7f4feef6d4dcd5312a55c",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 10,
+      "value": "t",
+      "start": 10,
+      "stop": 11,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "def3d4685d0ecc577a093c7d",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 11,
+      "value": "i",
+      "start": 11,
+      "stop": 12,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "0b1ea6b3d093d22d5bb78b8e",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 12,
+      "value": "o",
+      "start": 12,
+      "stop": 13,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "ea279be4d7ae27c5c562a003",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "orthographic",
+      "index": 13,
+      "value": "n",
+      "start": 13,
+      "stop": 14,
+      "label": null,
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "e255517e9e0a306591264526",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "morphological",
+      "index": 0,
+      "value": "re-",
+      "start": null,
+      "stop": null,
+      "label": "prefix",
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "2b20faaf0963dbe06dc1673b",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "morphological",
+      "index": 1,
+      "value": "construct",
+      "start": null,
+      "stop": null,
+      "label": "base",
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "8bfd25810cabfaef43688a4f",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "morphological",
+      "index": 2,
+      "value": "-ion",
+      "start": null,
+      "stop": null,
+      "label": "suffix",
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "4edf7e20643e9ae03c849805",
+      "entry": "297401a141ee06ca4c099aed",
+      "layer": "etymological",
+      "index": 0,
+      "value": "Illustrative record: source claim requires external verification",
+      "start": null,
+      "stop": null,
+      "label": "unparsed_claim",
+      "evidence": "057e1ed9e572fd0dae48dcde"
+    },
+    {
+      "id": "ea7bc9b88be0e9f38a612793",
+      "entry": "63b9c225ee5fa268f3891df3",
+      "layer": "orthographic",
+      "index": 0,
+      "value": "l",
+      "start": 0,
+      "stop": 1,
+      "label": null,
+      "evidence": "ce534ddf246db3d2f3ead7fb"
+    },
+    {
+      "id": "3e8e48c3bf4ecf046ad52429",
+      "entry": "63b9c225ee5fa268f3891df3",
+      "layer": "orthographic",
+      "index": 1,
+      "value": "o",
+      "start": 1,
+      "stop": 2,
+      "label": null,
+      "evidence": "ce534ddf246db3d2f3ead7fb"
+    },
+    {
+      "id": "e2b7edf0da99f00d67f4421e",
+      "entry": "63b9c225ee5fa268f3891df3",
+      "layer": "orthographic",
+      "index": 2,
+      "value": "g",
+      "start": 2,
+      "stop": 3,
+      "label": null,
+      "evidence": "ce534ddf246db3d2f3ead7fb"
+    },
+    {
+      "id": "fe8fdb748e64a6a6349bcde6",
+      "entry": "63b9c225ee5fa268f3891df3",
+      "layer": "orthographic",
+      "index": 3,
+      "value": "i",
+      "start": 3,
+      "stop": 4,
+      "label": null,
+      "evidence": "ce534ddf246db3d2f3ead7fb"
+    },
+    {
+      "id": "fd674ef1fec9bc5f01e7187d",
+      "entry": "63b9c225ee5fa268f3891df3",
+      "layer": "orthographic",
+      "index": 4,
+      "value": "c",
+      "start": 4,
+      "stop": 5,
+      "label": null,
+      "evidence": "ce534ddf246db3d2f3ead7fb"
+    },
+    {
+      "id": "04e549e0f9e2f7ed270bbb35",
+      "entry": "63b9c225ee5fa268f3891df3",
+      "layer": "phonological",
+      "index": 0,
+      "value": "/ˈlɒdʒɪk/",
+      "start": null,
+      "stop": null,
+      "label": "ipa",
+      "evidence": "ce534ddf246db3d2f3ead7fb"
+    }
+  ],
+  "relations": [
+
+  ]
+}

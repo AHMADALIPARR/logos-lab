@@ -1,0 +1,181 @@
+{
+  "version": "1.0.0",
+  "sources": [
+    {
+      "id": "6d7f703e6eaad8a5484a50cd",
+      "name": "Perseus TEI",
+      "locator": "/mnt/data/logos_real/examples/sample.xml",
+      "license": "unknown",
+      "kind": "dataset"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "667ee26de85e5d084b1a4c3d",
+      "source": "6d7f703e6eaad8a5484a50cd",
+      "reference": "tei:0:ratio",
+      "statement": "TEI lexical entry",
+      "confidence": "reported"
+    },
+    {
+      "id": "13991cff7df386009009090b",
+      "source": "6d7f703e6eaad8a5484a50cd",
+      "reference": "tei:1:λόγος",
+      "statement": "TEI lexical entry",
+      "confidence": "reported"
+    }
+  ],
+  "entries": [
+    {
+      "id": "858ac400aa57eb0e47488794",
+      "word": "ratio",
+      "lang": "la",
+      "pos": "unknown",
+      "etymology_number": 0,
+      "evidence": [
+        "667ee26de85e5d084b1a4c3d"
+      ]
+    },
+    {
+      "id": "9fac15c3ee6238ad5a3192e7",
+      "word": "λόγος",
+      "lang": "grc",
+      "pos": "unknown",
+      "etymology_number": 0,
+      "evidence": [
+        "13991cff7df386009009090b"
+      ]
+    }
+  ],
+  "senses": [
+    {
+      "id": "5e2c8e3c3555fe4d0139dcf4",
+      "entry": "858ac400aa57eb0e47488794",
+      "gloss": "reckoning",
+      "index": 0,
+      "evidence": "667ee26de85e5d084b1a4c3d"
+    },
+    {
+      "id": "9a51c75656ead57b20cdb4ee",
+      "entry": "9fac15c3ee6238ad5a3192e7",
+      "gloss": "word or account",
+      "index": 0,
+      "evidence": "13991cff7df386009009090b"
+    }
+  ],
+  "slices": [
+    {
+      "id": "3d7471637b72dc81b54923cd",
+      "entry": "858ac400aa57eb0e47488794",
+      "layer": "orthographic",
+      "index": 0,
+      "value": "r",
+      "start": 0,
+      "stop": 1,
+      "label": null,
+      "evidence": "667ee26de85e5d084b1a4c3d"
+    },
+    {
+      "id": "d87c73692086d7e6d779e931",
+      "entry": "858ac400aa57eb0e47488794",
+      "layer": "orthographic",
+      "index": 1,
+      "value": "a",
+      "start": 1,
+      "stop": 2,
+      "label": null,
+      "evidence": "667ee26de85e5d084b1a4c3d"
+    },
+    {
+      "id": "df773f1ccb4bfe8ffbc67207",
+      "entry": "858ac400aa57eb0e47488794",
+      "layer": "orthographic",
+      "index": 2,
+      "value": "t",
+      "start": 2,
+      "stop": 3,
+      "label": null,
+      "evidence": "667ee26de85e5d084b1a4c3d"
+    },
+    {
+      "id": "9b9ed0c6ebf2d52246a22b84",
+      "entry": "858ac400aa57eb0e47488794",
+      "layer": "orthographic",
+      "index": 3,
+      "value": "i",
+      "start": 3,
+      "stop": 4,
+      "label": null,
+      "evidence": "667ee26de85e5d084b1a4c3d"
+    },
+    {
+      "id": "800305a2547de9a84818e879",
+      "entry": "858ac400aa57eb0e47488794",
+      "layer": "orthographic",
+      "index": 4,
+      "value": "o",
+      "start": 4,
+      "stop": 5,
+      "label": null,
+      "evidence": "667ee26de85e5d084b1a4c3d"
+    },
+    {
+      "id": "ae126e19fe1bcab0f6642493",
+      "entry": "9fac15c3ee6238ad5a3192e7",
+      "layer": "orthographic",
+      "index": 0,
+      "value": "λ",
+      "start": 0,
+      "stop": 1,
+      "label": null,
+      "evidence": "13991cff7df386009009090b"
+    },
+    {
+      "id": "bb31ceec13ac287e2a3b4ecc",
+      "entry": "9fac15c3ee6238ad5a3192e7",
+      "layer": "orthographic",
+      "index": 1,
+      "value": "ό",
+      "start": 1,
+      "stop": 2,
+      "label": null,
+      "evidence": "13991cff7df386009009090b"
+    },
+    {
+      "id": "478bad5a32b5f811a47270bf",
+      "entry": "9fac15c3ee6238ad5a3192e7",
+      "layer": "orthographic",
+      "index": 2,
+      "value": "γ",
+      "start": 2,
+      "stop": 3,
+      "label": null,
+      "evidence": "13991cff7df386009009090b"
+    },
+    {
+      "id": "fffa2735e8c8eac96153c56c",
+      "entry": "9fac15c3ee6238ad5a3192e7",
+      "layer": "orthographic",
+      "index": 3,
+      "value": "ο",
+      "start": 3,
+      "stop": 4,
+      "label": null,
+      "evidence": "13991cff7df386009009090b"
+    },
+    {
+      "id": "dd9edb969e1efb9d35676ded",
+      "entry": "9fac15c3ee6238ad5a3192e7",
+      "layer": "orthographic",
+      "index": 4,
+      "value": "ς",
+      "start": 4,
+      "stop": 5,
+      "label": null,
+      "evidence": "13991cff7df386009009090b"
+    }
+  ],
+  "relations": [
+
+  ]
+}

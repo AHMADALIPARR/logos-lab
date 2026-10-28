@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require_relative '../lib/logos'
+require 'csv'
+input, tsv, output = ARGV
+abort 'usage: add-relations corpus.json relations.tsv output.json' unless input && tsv && output
+db = Logos::Store.load(input)
+source = db.source(name: 'Curated relationship assertions', locator: File.expand_path(tsv), kind: 'curated')
+count = 0
+CSV.foreach(tsv, headers: true, col_sep: "\t", encoding: 'utf-8') do |row|
+  from = db.entries.values.find { |e| e['word'] == row.fetch('from_word') && e['lang'] == row.fetch('from_lang') }
+  to = db.entries.values.find { |e| e['word'] == row.fetch('to_word') && e['lang'] == row.fetch('to_lang') }
+  abort "missing lexeme in row #{count+2}" unless from && to
+  reference = row.fetch('reference')
+  abort 'reference must not be empty' if reference.strip.empty?
+  evidence = db.evidence(source_id: source, reference: reference, statement: row.fetch('type'), confidence: row['status'] || 'reported')
+  db.relation(from: from['id'], to: to['id'], type: row.fetch('type'), evidence_id: evidence, status: row['status'] || 'attested')
+  count += 1
+end
+db.save(output)
+puts JSON.generate({relations_added: count}.merge(db.counts))

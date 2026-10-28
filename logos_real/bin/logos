@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+require_relative '../lib/logos'
+include Logos
+command = ARGV.shift
+begin
+  case command
+  when 'ingest-jsonl'
+    options = {max:nil,strict:false,license:'unknown'}
+    parser = OptionParser.new do |o|
+      o.on('--max N',Integer) { |v| options[:max]=v }
+      o.on('--strict') { options[:strict]=true }
+      o.on('--license NAME') { |v| options[:license]=v }
+    end
+    parser.parse!(ARGV)
+    input,output=ARGV
+    raise Invalid,'usage: ingest-jsonl [--max N] input.jsonl output.json' unless input && output
+    db=Store.new
+    source=db.source(name:'Wiktextract',locator:File.expand_path(input),license:options[:license])
+    stats=File.open(input,'r:utf-8') { |f| Wiktextract.new(db,source,strict:options[:strict]).ingest(f,max:options[:max]) }
+    db.save(output)
+    puts JSON.generate(stats.merge(db.counts))
+  when 'ingest-tei'
+    input,output=ARGV
+    raise Invalid,'usage: ingest-tei input.xml output.json' unless input && output
+    db=Store.new; source=db.source(name:'Perseus TEI',locator:File.expand_path(input))
+    n=Perseus.new(db,source).ingest(File.read(input,encoding:'utf-8'))
+    db.save(output); puts JSON.generate({processed:n}.merge(db.counts))
+  when 'export-prolog'
+    input,output=ARGV
+    raise Invalid,'usage: export-prolog input.json output.pl' unless input && output
+    db=Store.load(input); File.open(output,'w:utf-8') { |f| Prolog.new(db).emit(f) }
+    puts JSON.generate(db.counts)
+  when 'query'
+    input,word,lang=ARGV
+    raise Invalid,'usage: query input.json WORD [LANG]' unless input && word
+    db=Store.load(input); graph=Relations.new(db)
+    result=graph.by_word(word,lang).map { |e| {'entry'=>e,'senses'=>db.senses.values.select { |s| s['entry']==e['id'] }, 'slices'=>db.slices.values.select { |s| s['entry']==e['id'] }, 'ancestors'=>graph.ancestors(e['id'])} }
+    puts JSON.pretty_generate(result)
+  when 'verify'
+    db=Store.load(ARGV.fetch(0)); puts JSON.generate({verified:true}.merge(db.counts))
+  else
+    warn 'commands: ingest-jsonl, ingest-tei, export-prolog, query, verify'; exit 2
+  end
+rescue Logos::Invalid, Logos::Limit, Errno::ENOENT, REXML::ParseException => e
+  warn "#{e.class}: #{e.message}"; exit 1
+end

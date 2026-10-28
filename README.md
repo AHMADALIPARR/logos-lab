@@ -82,6 +82,14 @@ One tiny program per system, each showing a different way of getting to an answe
 
 Words become facts, and every derivation carries the source it came from. The rules read those facts: `ancestor/2` walks the derivation chain and `shared_root/3` connects words with a common root. The lab uses it as a small model of knowledge where every answer can be traced back to its evidence.
 
+### `logos_real/`: the word graph in Ruby
+
+A Ruby tool that reads dictionary entries (Wiktextract JSONL or TEI XML) and builds a knowledge graph where every claim keeps its source. It has its own Horn engine with unification and an occurs check, depth-bounded search, a query command, and an export to Prolog facts. See its own README for the commands.
+
+### `logic_stack/`: binary to tree
+
+`LOGIC_STACK.md` is the full stack document, kept whole: bits, logic, FOIL, Metagol and the decision tree, with the kernels in Prolog, Haskell, OCaml and C.
+
 ### `legacy-logic-archive/`: preservation
 
 The old programs this field grew from, kept by SHA-256 fingerprint so a file is the file it claims to be. The manifest records where each source came from, its size, its time and its rights, and `research/` holds the notes behind each collection phase. It is the lab's memory of the historical source.
