@@ -4,6 +4,16 @@
 
 Logic programming, from a unifier to a lexicon. Facts and rules go in, and answers come out by unification and search.
 
+## The production stack
+
+The production stack is a parallel logic-based AI machine. Facts and rules say what is true, and the search that finds the answers is a separate choice, so the logic stays the same whether the answers come from one depth-first, backtracking walk or from many branches explored side by side. Each part of the lab is its own independent piece of logic, and the parts run at the same time:
+
+```sh
+sh scripts/run_all.sh
+```
+
+That starts the etymology rules, the lexicon and deduction modules, the Logic Stack in Prolog, C, Haskell and OCaml, the Boogie proofs, the execution lock, the Ruby tool and the archive check together, one job per part, and prints what each one answers. `JOBS=2` limits how many run at once.
+
 ## A short history
 
 Logic programming is the idea that a program can be a set of facts and rules, and that running it means asking a question and letting the machine search for answers. These are the systems behind the code in this lab.
