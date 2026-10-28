@@ -695,11 +695,10 @@ temporal_eval(Trace,always(A)) :-
 temporal_eval(Trace,until(A,B)) :-
     temporal_until(Trace,A,B,_).
 
-temporal_eventually(
-    [state(T,_)|_]=Trace,
-    Formula,
-    T
-) :-
+temporal_eventually(Trace, Formula, T) :-
+    % Note: the head must be Trace itself, not [state(T,_)|_]=Trace --
+    % in Prolog that head term is =/2, not a list, so it never matched.
+    Trace = [state(T,_)|_],
     temporal_eval(Trace,Formula),
     !.
 
@@ -710,11 +709,9 @@ temporal_eventually(
 ) :-
     temporal_eventually(Rest,Formula,Time).
 
-temporal_always(
-    [state(T,_)|Rest]=Trace,
-    Formula,
-    T
-) :-
+temporal_always(Trace, Formula, T) :-
+    % See temporal_eventually: bind Trace in the body, not as a =/2 head term.
+    Trace = [state(T,_)|Rest],
     temporal_eval(Trace,Formula),
     temporal_always_rest(Rest,Formula).
 
@@ -727,12 +724,9 @@ temporal_always_rest(
     temporal_eval([State|Rest],Formula),
     temporal_always_rest(Rest,Formula).
 
-temporal_until(
-    [state(T,_)|_]=Trace,
-    _,
-    B,
-    T
-) :-
+temporal_until(Trace, _, B, T) :-
+    % See temporal_eventually: bind Trace in the body, not as a =/2 head term.
+    Trace = [state(T,_)|_],
     temporal_eval(Trace,B),
     !.
 

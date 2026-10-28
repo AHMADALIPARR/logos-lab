@@ -20,3 +20,6 @@ why3shapes.gz
 
 # built engine
 wam/wam
+
+# gardener production logs (scripts/gardener.sh)
+logs/
